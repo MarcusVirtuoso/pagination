@@ -1,0 +1,29 @@
+﻿<!-- TODO: make it a reusable directive (don't worry about style) -->
+<div class="pagination">
+    <div>
+        Items per page
+        <select ng-model="queryParams.pageSize" ng-init="queryParams.pageSize='20'" ng-change="updatePageSize()">
+            <!-- select how many items should be displayed per page -->
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option> <!-- default option on first load should be 20 -->
+            <option value="30">30</option>
+            <option value="{{ totalCount }}">all</option> <!-- disregard pagination: show all the items -->
+        </select>
+    </div>
+    <div>
+        <button ng-click="gotoPage(queryParams.currentPage,'first')">&lt;&lt;</button> <!-- 'go to first page' button -->
+        <button ng-click="gotoPage(queryParams.currentPage,'prev')">&lt;</button> <!-- 'go to previous page' button: can't go lower than 1 -->
+        Page <input type="number" value="1" min="1" max="{{ todo.totalPages }}" 
+                    ng-init="queryParams.currentPage=1" 
+                    ng-model="queryParams.currentPage"
+                    ng-change="gotoPage(queryParams.currentPage)"
+             /> <!-- input to select page to go to: go to page when input changes value --> of  {{ todo.totalPages }} <!-- number of pages -->
+
+        <button ng-click="gotoPage(queryParams.currentPage,'next')">&gt;</button> <!-- 'go to next page' button: can't go higher than last page number -->
+        <button ng-click="gotoPage(queryParams.currentPage,'last')">&gt;&gt;</button> <!-- 'go to last page' button -->
+    </div>
+    <div>
+        <span>{{ totalCount }} items</span> <!-- total number of items -->
+    </div>
+
+</div>
